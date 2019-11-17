@@ -1,0 +1,62 @@
+<div class="main">
+
+<h3 class="title">Books</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th class="you">Title</th>
+			<th class="me">Body</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @books.each do |book| %>
+		<tr>
+		<td>
+			<%= book.title %>
+		</td>
+		<td>
+			<%= book.body %>
+		</td>
+		<td class="for">
+			<%= link_to "Show", book_path(book.id), class: "aaa" %>
+			<%= link_to "Edit", edit_book_path(book.id), class: "bbb"  %>
+			<%= link_to "Destroy",destroy_book_path(book.id), class: "ccc" ,method: :delete,"data-confirm" => "Are you sure？" %>
+		</td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+
+<div>
+	<h3 class="new">New book</h3>
+<!-- form_for部分 -->
+<%= form_for @book do |f| %>
+
+ <% if @book.errors.any? %>
+    <h3><%= @book.errors.count %> errors prohibited this book from being saved:</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+ 
+    <h4>Body</h4>
+    <%= f.text_area :body %>
+ 
+    <p><%= f.submit 'Create Book' %></p>
+ 
+</div>
+
+<% end %>
+
+</div>
+
+
+
